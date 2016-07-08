@@ -9,6 +9,36 @@
 			<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 			<script type="text/javascript" src="script/formJQuery.js"></script>
 			<link rel="stylesheet" type="text/css" href="styles/formStyle.css">
+			<script type="text/javascript">
+			$(document).ready(function () {
+				$("#submit").click(function () {
+					var name = $("#name").val();
+					var email = $("#email").val();
+					var email = $("#password").val();
+					var comment = $("#comment").val();
+					// console.log(name, email, password, comment);
+
+					$("<img src='img/ajax-loader.gif' id='loading' alt='loading' />").appendTo("#result");
+					$.ajax({
+					  url: "post_email.php",
+					  method: "POST",
+					  data: "name=" + name + "&email=" + email + "&comment=" + comment, 
+					  /*data: { myName: name, myEmail: email, MyComment: comment }
+					    })*/
+					  success: function(result) {
+					  	// console.log(result);
+					  	$("#result").hide().html(result).fadeIn("slow");
+
+					  }
+					  	/*.done(function( msg ) {
+	              			alert( "Data Saved: " + msg );*/
+					
+					});
+
+					return false;
+				});
+			});
+			</script>
 	</head>
 	<body>
 		<div id="wrap">
@@ -16,10 +46,11 @@
 					Registration Form <span class="glyphicon glyphicon-circle-arrow-down"></span>
 				</a> 
 				<a href="#" id="cancel_comment" style="display: none" class="btn btn-warning btn-lg active ">
-				Cancel</a>
+					Cancel <span class="glyphicon glyphicon-circle-arrow-up"></span>
+				</a>
 			
 				<div id="stylized" class="myform">
-					<form id="form" name="form" method="post" action="index.html">
+					<form id="form" name="form" method="POST" action="post_email.php">
 						<h1>Sign-up form</h1>
 						<p>This is the basic look of my form without table</p>
 
@@ -36,20 +67,22 @@
 						<label>Password
 							<span class="small">Min size 6 chars</span>
 						</label>
-						<input type="text" name="password" id="password" />
+						<input type="password" name="password" id="password" />
 
 						<label>Your comment!
 							<span class="small">What's on your mind?</span>
 						</label>
-						<textarea></textarea>
+						<textarea name="comment" id="comment"></textarea>
 
 						<label>Are you agree with conditions?
 							<span class="small">Yes, of course.</span>
 						</label>
 						<input type="checkbox" id="agree" />
-						<button type="submit" id="btn" disabled="disabled">Sign-up</button>
+						<button type="submit" id="submit" disabled="disabled">Sign-up</button>
 						<div class="spacer"></div>
-
+						<div id="result">
+							
+						</div>
 					</form>
 				</div>
 		</div>

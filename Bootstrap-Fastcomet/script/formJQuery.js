@@ -26,10 +26,12 @@ $(document).ready(function () {
 	});
 	$('#agree').click(function(){
 		if($(this).is(':checked')){
-			$('#btn').attr('disabled', null).css('background', '#181818');
+			$('#submit').attr('disabled', null).css('background', '#3EB1DD');
 		}
 		else{
-			$('#btn').attr('disabled','disabled').css('background', '#9B9A98');
+			$('#submit').attr('disabled','disabled').css('background', '#66C1E4');
 		}
 	});
 });
+
+// #3EB1DD;
